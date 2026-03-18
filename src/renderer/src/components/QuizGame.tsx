@@ -1,5 +1,5 @@
 // QuizGame.tsx – Active quiz gameplay component
-import { useState, useEffect, useRef, JSX } from 'react'
+import { useState, useEffect, useRef, JSX, KeyboardEvent } from 'react'
 
 interface QuizGameProps {
   words: string[]
@@ -46,7 +46,7 @@ export default function QuizGame({ words, onComplete }: QuizGameProps): JSX.Elem
     }
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
       if (feedback === null) {
         submitAnswer()
@@ -73,7 +73,7 @@ export default function QuizGame({ words, onComplete }: QuizGameProps): JSX.Elem
         </p>
 
         <div className="word-display">
-          <p className="current-word">{words[currentIndex]}</p>
+          <p className="current-word">Listen carefully and type what you hear</p>
           <button className="speak-btn" onClick={() => speak(words[currentIndex])}>
             🔊 Hear again
           </button>
@@ -86,7 +86,7 @@ export default function QuizGame({ words, onComplete }: QuizGameProps): JSX.Elem
             placeholder="Type your answer..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             disabled={feedback !== null}
             autoComplete="off"
             spellCheck="false"
