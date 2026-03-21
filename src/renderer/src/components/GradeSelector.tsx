@@ -10,9 +10,14 @@ interface WordList {
 interface GradeSelectorProps {
   wordLists: WordList[]
   onStart: (selectedGrade: number) => void
+  onCreateCustomList: () => void
 }
 
-export default function GradeSelector({ wordLists, onStart }: GradeSelectorProps): JSX.Element {
+export default function GradeSelector({
+  wordLists,
+  onStart,
+  onCreateCustomList
+}: GradeSelectorProps): JSX.Element {
   const [selectedGrade, setSelectedGrade] = useState(1)
 
   const handleStart = (): void => {
@@ -44,7 +49,7 @@ export default function GradeSelector({ wordLists, onStart }: GradeSelectorProps
         <button className="start-btn" onClick={handleStart}>
           ▶ Start Quiz
         </button>
-        <button className="start-btn custom-list-btn" type="button">
+        <button className="start-btn custom-list-btn" type="button" onClick={onCreateCustomList}>
           ➕ Create Custom List
         </button>
       </div>

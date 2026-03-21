@@ -6,6 +6,7 @@ import './App.css'
 import GradeSelector from './components/GradeSelector'
 import QuizGame from './components/QuizGame'
 import ResultsScreen from './components/ResultsScreen'
+import CustomListScreen from './components/CustomListScreen'
 
 interface WordList {
   grade: number
@@ -43,7 +44,7 @@ const WORD_LISTS: WordList[] = [
 ]
 
 const ROUNDS = 10
-type Screen = 'home' | 'playing' | 'results'
+type Screen = 'home' | 'custom-list' | 'playing' | 'results'
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5)
@@ -59,6 +60,20 @@ export default function App(): JSX.Element {
     const picked = shuffle(list.words).slice(0, ROUNDS)
     setWords(picked)
     setScreen('playing')
+  }
+
+  const handleOpenCustomList = (): void => {
+    setScreen('custom-list')
+  }
+
+  const handleStartCustomGame = (customWords: string[]): void => {
+    const picked = shuffle(customWords).slice(0, ROUNDS)
+    setWords(picked)
+    setScreen('playing')
+  }
+
+  const handleBackToHome = (): void => {
+    setScreen('home')
   }
 
   const handleQuizComplete = (score: number): void => {
@@ -77,7 +92,17 @@ export default function App(): JSX.Element {
   /* ──────────────────────────────────────────────────────────────── */
 
   if (screen === 'home') {
-    return <GradeSelector wordLists={WORD_LISTS} onStart={handleStartGame} />
+    return (
+      <GradeSelector
+        wordLists={WORD_LISTS}
+        onStart={handleStartGame}
+        onCreateCustomList={handleOpenCustomList}
+      />
+    )
+  }
+
+  if (screen === 'custom-list') {
+    return <CustomListScreen onBack={handleBackToHome} onStartCustomQuiz={handleStartCustomGame} />
   }
 
   if (screen === 'playing') {

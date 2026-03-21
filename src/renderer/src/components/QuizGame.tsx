@@ -38,7 +38,7 @@ export default function QuizGame({ words, onComplete }: QuizGameProps): JSX.Elem
 
   const nextWord = (): void => {
     if (currentIndex + 1 >= words.length) {
-      onComplete(score + (feedback === 'correct' ? 1 : 0))
+      onComplete(score)
     } else {
       setCurrentIndex((i) => i + 1)
       setInput('')
