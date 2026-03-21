@@ -22,7 +22,9 @@ export default function GradeSelector({ wordLists, onStart }: GradeSelectorProps
   return (
     <div className="app home">
       <div className="logo">📚</div>
-      <h1>Spelling Star!</h1>
+      <h1>
+        Spelling Star! <span className="version-badge">v1.1.0</span>
+      </h1>
       <p className="subtitle">Practise your spelling and become a star!</p>
       <div className="grade-select">
         <p>Choose your level:</p>
@@ -38,9 +40,14 @@ export default function GradeSelector({ wordLists, onStart }: GradeSelectorProps
           ))}
         </div>
       </div>
-      <button className="start-btn" onClick={handleStart}>
-        ▶ Start Quiz
-      </button>
+      <div className="home-actions">
+        <button className="start-btn" onClick={handleStart}>
+          ▶ Start Quiz
+        </button>
+        <button className="start-btn custom-list-btn" type="button">
+          ➕ Create Custom List
+        </button>
+      </div>
     </div>
   )
 }
