@@ -24,7 +24,8 @@ $ npm run dev
 
 ```bash
 # For windows
-$ npm run build:win
+$ npm run build:win / npm run dojob
+
 
 # For macOS
 $ npm run build:mac
